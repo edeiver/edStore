@@ -83,3 +83,19 @@ export const login = async (username, password) => {
 
   return response.json();
 };
+
+export const register = async (userData) => {
+  const response = await fetch(`${BASE_URL}/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+
+  if (!response.ok) {
+    throw new Error("No se pudo crear la cuenta");
+  }
+
+  return response.json();
+};

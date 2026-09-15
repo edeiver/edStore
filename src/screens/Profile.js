@@ -19,8 +19,10 @@ import {
 import ProfileItem from "../components/ProfileItem";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { useAuth } from "../contexts/AuthContext";
 
 const Profile = ({ navigation }) => {
+    const {logout } = useAuth()
   const globalStyles = createGlobalStyles(theme);
   const accountItems = [
     {
@@ -86,6 +88,7 @@ const Profile = ({ navigation }) => {
         </View>
       </View>
       <Button
+        onPress={()=>logout()}
         type="secondary"
         style={{ marginVertical: 20}}
         title={'Sign out'}
