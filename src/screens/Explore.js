@@ -1,4 +1,10 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createGlobalStyles } from "../style/globalStyles";
@@ -14,6 +20,7 @@ import Filters from "../components/Filters";
 const Explore = ({ navigation }) => {
   const globlalStyles = createGlobalStyles(theme);
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
   const [departments, setDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [selectedFilter, setSelectedFilter] = useState("all");
@@ -72,11 +79,14 @@ const Explore = ({ navigation }) => {
   }, []);
   const loadProducts = async () => {
     try {
+      setLoading(true);
       const response = await getProducts();
       console.log("Productos obtenidos:", response);
       setAllProducts(response);
+      setLoading(false);
     } catch (error) {
       console.error("Error al obtener los productos:", error);
+      setLoading(false);
     }
   };
   const loadCategories = async () => {
@@ -131,17 +141,21 @@ const Explore = ({ navigation }) => {
         items={filters}
         selectedFilter={selectedFilter}
       />
-      <FlatList
-        data={searchedProducts}
-        numColumns={2}
-        contentContainerStyle={{
-          paddingTop: theme.spacing.md,
-          paddingBottom: 100,
-        }}
-        columnWrapperStyle={styles.wrapperRow}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <ProductCard product={item} />}
-      />
+      {loading ? (
+        <ActivityIndicator color={theme.colors.primary} />
+      ) : (
+        <FlatList
+          data={searchedProducts}
+          numColumns={2}
+          contentContainerStyle={{
+            paddingTop: theme.spacing.md,
+            paddingBottom: 100,
+          }}
+          columnWrapperStyle={styles.wrapperRow}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => <ProductCard product={item} />}
+        />
+      )}
     </SafeAreaView>
   );
 };
