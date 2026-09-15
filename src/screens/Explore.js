@@ -145,7 +145,7 @@ const Explore = ({ navigation }) => {
         <ActivityIndicator color={theme.colors.primary} />
       ) : (
         <FlatList
-          data={searchedProducts}
+          data={sortedProducts}
           numColumns={2}
           contentContainerStyle={{
             paddingTop: theme.spacing.md,

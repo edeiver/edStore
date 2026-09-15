@@ -99,7 +99,7 @@ const Bag = ({ navigation }) => {
               ]}
             >
               <Text style={[styles.titleItemOrder]}>Estimate taxes</Text>
-              <Text style={[styles.titleItemOrder]}>{taxes}</Text>
+              <Text style={[styles.titleItemOrder]}>{taxes.toFixed(2)}</Text>
             </View>
             <View style={[styles.line]} />
             <View
