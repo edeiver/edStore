@@ -19,10 +19,10 @@ Browse a real multi-category catalog (clothing, electronics, jewelry and more), 
 
 <table>
   <tr>
-    <td><img src="docs/screenshots/home.png" width="220" alt="Home screen" /></td>
-    <td><img src="docs/screenshots/explore.png" width="220" alt="Explore screen" /></td>
-    <td><img src="docs/screenshots/bag.png" width="220" alt="Bag screen" /></td>
-    <td><img src="docs/screenshots/profile.png" width="220" alt="Profile screen" /></td>
+    <td><img src="assets/screenshots/home.png" width="220" alt="Home screen" /></td>
+    <td><img src="assets/screenshots/explore.png" width="220" alt="Explore screen" /></td>
+    <td><img src="assets/screenshots/bag.png" width="220" alt="Bag screen" /></td>
+    <td><img src="assets/screenshots/profile.png" width="220" alt="Profile screen" /></td>
   </tr>
   <tr>
     <td align="center">Home</td>
@@ -120,13 +120,6 @@ npm run web       # open in your browser
 Or scan the QR code with the **Expo Go** app on your phone for the fastest way to try it on a real device — no build step required.
 
 No environment variables or API keys are needed: the app talks directly to the public Fake Store API (`https://fakestoreapi.com`).
-
-## Adding your screenshots
-
-1. Run the app (`npm start` → open on a simulator, device, or `npm run web`).
-2. Capture the Home, Explore, Bag, and Profile screens.
-3. Save the images under `docs/screenshots/` in this repo (create the folder if it doesn't exist), using the same file names referenced at the top of this README (`home.png`, `explore.png`, `bag.png`, `profile.png`) — or update the paths in the [Screenshots](#screenshots) section to match your file names.
-4. Commit and push — the images will render directly in the table above on GitHub.
 
 ## Roadmap
 
