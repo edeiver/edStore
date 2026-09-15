@@ -1,10 +1,38 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CartContext = createContext();
 
+const CART_STORAGE_KEY = "@edstore_cart";
+
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const loadCart = async () => {
+    try {
+      const storedCart = await AsyncStorage.getItem(CART_STORAGE_KEY);
+
+      if (storedCart) {
+        setCart(JSON.parse(storedCart));
+      }
+    } catch (error) {
+      console.error("Error loading cart:", error);
+    }
+  };
+  const saveCart = async () => {
+    try {
+      await AsyncStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    } catch (error) {
+      console.error("Error saving cart:", error);
+    }
+  };
+  useEffect(() => {
+    loadCart();
+  }, []);
+
+  useEffect(() => {
+    saveCart();
+  }, [cart]);
 
   const addToBag = (product) => {
     setCart((currentCart) => {
@@ -15,7 +43,10 @@ export const CartProvider = ({ children }) => {
       if (existingProduct) {
         return currentCart.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+              }
             : item,
         );
       }
@@ -31,10 +62,9 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromBag = (id) => {
-    Alert.alert("Remove Item", "are you sure?", [
+    Alert.alert("Remove Item", "Are you sure?", [
       {
         text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
         style: "cancel",
       },
       {
@@ -51,7 +81,12 @@ export const CartProvider = ({ children }) => {
   const increaseQuantity = (id) => {
     setCart((currentCart) =>
       currentCart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+        item.id === id
+          ? {
+              ...item,
+              quantity: item.quantity + 1,
+            }
+          : item,
       ),
     );
   };
@@ -60,7 +95,12 @@ export const CartProvider = ({ children }) => {
     setCart((currentCart) =>
       currentCart
         .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
+          item.id === id
+            ? {
+                ...item,
+                quantity: item.quantity - 1,
+              }
+            : item,
         )
         .filter((item) => item.quantity > 0),
     );
