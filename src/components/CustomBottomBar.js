@@ -19,7 +19,7 @@ const icons = {
 };
 
 const labels = {
-  Atelier: "Atelier",
+  Atelier: "Home",
   Explore: "Explore",
   Bag: "Bag",
   Profile: "Profile",
@@ -121,7 +121,7 @@ export default CustomBottomBar;
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: theme.colors.surface,
+    backgroundColor: theme.colors.white,
 
     borderTopWidth: 1,
     borderTopColor: theme.colors.border + "55",

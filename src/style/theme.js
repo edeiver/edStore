@@ -7,7 +7,8 @@ export const theme = {
 
     // Background / surfaces
     background: "#FBF8FF",
-    surface: "#FBF8FF",
+    surface: "#F3EFF1",
+    //surface: "#FBF8FF",
 
     white: "#FFFFFF",
     black: "#000000",

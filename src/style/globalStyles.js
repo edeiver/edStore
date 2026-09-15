@@ -25,4 +25,14 @@ export const createGlobalStyles = (theme) =>
       alignItems: "center",
       gap: theme.spacing.sm,
     },
+
+    row:{
+        flexDirection: 'row'
+    },
+    spaceBetween:{
+        justifyContent: 'space-between',
+    },
+    fullWidth:{
+        width: '100%'
+    }
   });

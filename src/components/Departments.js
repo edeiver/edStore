@@ -7,14 +7,14 @@ import {
 import React from "react";
 import { theme } from "../style/theme";
 
-const Departments = ({ items = [], onSelect = () => {}, selectedCategory = "all" }) => {
+const Departments = ({ items = [], onSelect = () => {}, selectedCategory = "all", style={} }) => {
   const categories = ["all", ...items];
 
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      style={styles.container}
+      style={[styles.container, style]}
       contentContainerStyle={styles.content}
     >
       {categories.map((item, index) => (

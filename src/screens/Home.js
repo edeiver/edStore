@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { getCategories, getProducts } from "../api";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,6 +13,7 @@ const Home = () => {
   const globalStyles = createGlobalStyles(theme);
   const [departments, setDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("all");
+  const [loading, setLoading] = useState(false);
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
     // Lógica para obtener los productos
@@ -29,20 +30,26 @@ const Home = () => {
 
   const loadProducts = async () => {
     try {
+      setLoading(true);
       const response = await getProducts();
       console.log("Productos obtenidos:", response);
       setAllProducts(response);
+      setLoading(false);
     } catch (error) {
       console.error("Error al obtener los productos:", error);
+      setLoading(false);
     }
   };
   const loadCategories = async () => {
     try {
+      setLoading(true);
+
       const response = await getCategories();
       console.log("Categorías obtenidas:", response);
       setDepartments(response);
     } catch (error) {
       console.error("Error al obtener las categorías:", error);
+      setLoading(false);
     }
   };
   return (
@@ -54,17 +61,22 @@ const Home = () => {
         onSelect={setSelectedDepartment}
         selectedCategory={selectedDepartment}
       />
-      <FlatList
-        data={filteredProducts}
-        numColumns={2}
-        contentContainerStyle={{
-          paddingTop: theme.spacing.md,
-          paddingBottom: 100,
-        }}
-        columnWrapperStyle={styles.wrapperRow}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <ProductCard product={item} />}
-      />
+      {loading 
+      ?
+      <ActivityIndicator color={theme.colors.primary}/>
+      :
+        <FlatList
+            data={filteredProducts}
+            numColumns={2}
+            contentContainerStyle={{
+            paddingTop: theme.spacing.md,
+            paddingBottom: 100,
+            }}
+            columnWrapperStyle={styles.wrapperRow}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => <ProductCard product={item} />}
+        />
+      }
     </SafeAreaView>
   );
 };

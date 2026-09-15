@@ -4,6 +4,8 @@ export const getProducts = async () => {
   const response = await fetch(`${BASE_URL}/products`);
 
   if (!response.ok) {
+        console.log(response);
+
     throw new Error("Error al obtener los productos");
   }
 
@@ -14,6 +16,7 @@ export const getProductById = async (id) => {
   const response = await fetch(`${BASE_URL}/products/${id}`);
 
   if (!response.ok) {
+    
     throw new Error("Error al obtener el producto");
   }
 
