@@ -32,8 +32,6 @@ Browse a real multi-category catalog (clothing, electronics, jewelry and more), 
   </tr>
 </table>
 
-> Replace the placeholders above with real captures from a simulator, device, or `expo start --web`. See [Adding your screenshots](#adding-your-screenshots) below.
-
 ## About the project
 
 edStore is a personal portfolio project built to practice and showcase real-world React Native patterns: navigating between authenticated/unauthenticated flows, consuming a REST API, managing global state with Context, persisting data on-device, and building a fully custom, themeable UI kit from scratch (no UI library).
